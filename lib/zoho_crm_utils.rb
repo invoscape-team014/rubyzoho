@@ -49,6 +49,7 @@ module ZohoCrmUtils
     names.each do |name|
       n = name.class == Symbol ? name.to_s : name
       n.gsub!(/[()]*/, '')
+      n.gsub!(/(-)/, '_')
       raise(RuntimeError, "Bad field name: #{name}") unless self.class.method_name?(n)
       self.class.create_getter(klass, n)
       self.class.create_setter(klass, n)
